@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Crop Recommendation - Prediction</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('static/images/wheat-field-image_662214-334765.jpg'); /* Replace with the actual URL of the image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Keep background fixed */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Default text color */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    
+        .prediction-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+    
+        .prediction-card {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly more opaque card */
+            padding: 60px; /* More padding for spaciousness */
+            border-radius: 20px; /* More rounded corners */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            text-align: center;
+            max-width: 700px; /* Slightly wider card */
+            width: 100%;
+        }
+    
+        .prediction-card h2 {
+            color: #4CAF50; /* A brighter, more prominent green */
+            font-size: 2.8em; /* Slightly larger heading */
+            margin-bottom: 25px;
+            font-weight: 600; /* Slightly bolder heading */
+        }
+    
+        .prediction-card strong {
+            color: #2E7D32; /* A darker, richer green for emphasis */
+            font-weight: 700; /* Even bolder */
+            font-style: normal; /* Remove italic for stronger emphasis */
+            text-decoration: underline; /* Add underline for visual prominence */
+        }
+    
+        .prediction-card p {
+            color: #555;
+            line-height: 1.7; /* Slightly increased line height for better readability */
+            margin-bottom: 30px;
+            font-size: 1.1em; /* Slightly larger paragraph text */
+        }
+    
+        .containerfooter {
+            background-color: #4CAF50; /* Match the brighter green */
+            padding: 25px 0; /* Slightly more padding */
+            color: white;
+            margin-top: 60px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.05); /* Subtle top shadow */
+        }
+    
+        .containerfooter p {
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+    
+        /* Subtle animation for the card */
+        .prediction-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="prediction-container">
+        <div class="prediction-card">
+            <h2>You should grow <strong class="coconut-text">{{ prediction }}</strong> in your farm</h2>
+            {% if prediction == "coconut" %}
+            <p>Coconut cultivation is highly profitable due to the versatile uses of the coconut palm. It thrives in warm, humid climates with well-drained soil and requires moderate rainfall. Growing coconut can provide a sustainable income through the sale of nuts, oil, coir, and other by-products. Additionally, coconut palms are relatively low-maintenance once established and can contribute to soil health and biodiversity.</p>
+            {% elif prediction == "rice" %}
+            <p>Rice is a staple food for a large part of the world's population and has a significant market demand. It grows best in flooded fields with warm temperatures and high humidity. While it requires significant water, successful rice cultivation can yield high returns, especially with improved farming techniques and high-yielding varieties. Rice farming also supports numerous livelihoods in many regions.</p>
+            {% elif prediction == "maize" %}
+            <p>Maize (corn) is a versatile crop used for food, animal feed, and industrial purposes. It adapts to a wide range of climates and soil types and is relatively easy to cultivate. With advancements in hybrid varieties and farming practices, maize can offer high yields and good profitability. It also plays a crucial role in global food security and agricultural economies.</p>
+            {% elif prediction == "jute" %}
+            <p>Jute is a natural fiber with high demand in the textile and packaging industries due to its biodegradability and strength. It grows best in warm, humid climates with well-drained alluvial soil. Cultivating jute can be environmentally friendly and provide a good income for farmers, especially with the increasing global focus on sustainable materials.</p>
+            {% elif prediction == "cotton" %}
+            <p>Cotton is a major cash crop globally, valued for its fiber used in textiles. It requires warm temperatures, plenty of sunshine, and well-drained soil. While it can be water-intensive, efficient irrigation practices can improve sustainability. Successful cotton farming can lead to significant economic returns, supporting numerous jobs in agriculture and related industries.</p>
+            {% elif prediction == "coffee" %}
+            <p>Coffee is a highly sought-after beverage crop with a large global market. It thrives in tropical highlands with consistent rainfall and well-drained soil. Growing coffee can be very profitable, especially for specialty varieties. It also supports numerous smallholder farmers and contributes significantly to the economies of many coffee-producing countries.</p>
+            {% elif prediction == "banana" %}
+            <p>Bananas are a popular and nutritious fruit consumed worldwide. They grow best in warm, humid climates with rich, well-drained soil. Banana cultivation can provide a steady income due to consistent demand. Different varieties cater to various market needs, and the crop can be relatively high-yielding with proper management.</p>
+            {% elif prediction == "millet" %}
+            <p>Millet is a nutritious and drought-tolerant grain, making it suitable for cultivation in drier regions. It requires less water compared to other cereals and can grow in less fertile soils. Promoting millet cultivation can enhance food security in water-scarce areas and provide a sustainable income for farmers in these regions.</p>
+            {% elif prediction == "blackgram" %}
+            <p>Blackgram (Urad Dal) is a nutritious legume that is part of many diets and has good market value. It is relatively short-duration, can improve soil fertility by fixing nitrogen, and grows well in warm, rain-fed conditions with well-drained soil. It can be a profitable crop, especially as part of crop rotation systems.</p>
+            {% elif prediction == "lentil" %}
+            <p>Lentils are a nutritious pulse crop with high protein content and good market demand. They are relatively drought-tolerant and can grow in various soil types, preferring cooler temperatures during their growing season. Lentil cultivation can improve soil health and provide a valuable source of income for farmers.</p>
+            {% elif prediction == "groundnut" %}
+            <p>Groundnut (peanut) is an important oilseed and food crop. It grows well in warm climates with well-drained, sandy loam soils. Besides its edible nuts and oil, groundnut is also beneficial for soil health as it is a legume. It can be a profitable crop with various market applications.</p>
+            {% elif prediction == "mango" %}
+            <p>Mango is a popular and economically important fruit crop in tropical and subtropical regions. Mango trees are relatively hardy once established and can provide a long-term source of income. The fruit has high demand both domestically and internationally, making mango cultivation a potentially lucrative venture.</p>
+            {% elif prediction == "grapes" %}
+            <p>Grapes are a high-value crop with a wide range of uses, from fresh consumption to wine production. They require specific climatic conditions, including warm, sunny summers and well-drained soil. Successful grape cultivation, especially for wine varieties or table grapes, can yield significant economic returns.</p>
+            {% elif prediction == "chickpea" %}
+            <p>Chickpea (Bengal gram) is a vital pulse crop, rich in protein and fiber, making it a nutritious addition to diets. It is relatively drought-tolerant and thrives in well-drained, light to medium soils with cool, dry conditions during its maturity. Growing chickpeas can improve soil fertility through nitrogen fixation and offers a good market price, contributing to the economic stability of farmers, especially in rainfed regions.</p>
+            {% else %}
+            <p></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="containerfooter">
+        <footer class="foot">
+            <p class="text-center"> <b>AISSMS INSTITUTE OF INFORMATION TECHNOLOGY</b> </p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
